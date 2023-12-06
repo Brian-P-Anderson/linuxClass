@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-Time Updates</title>
+</head>
+<body>
+  <h1>Real-Time Updates:</h1>
+  <div id="python-updates"></div>
+  <div id="bash-updates"></div>
+  <div id="js-updates"></div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    socket.on('update', (data) => {
+      let targetDivId = '';
+      if (data.message.includes('Python')) {
+        targetDivId = 'python-updates';
+        console.log('Python checking in...');
+      } else if (data.message.includes('Bash')) {
+        targetDivId = 'bash-updates';
+        console.log('Bash checking in...');
+      } else if (data.message.includes('JS')) {
+        targetDivId = 'js-updates';
+        console.log('JS checking in...');
+      }
+    
+      const targetDiv = document.getElementById(targetDivId);
+      if (targetDiv) {
+        const newParagraph = document.createElement('p');
+        newParagraph.textContent = data.message;
+        targetDiv.appendChild(newParagraph);
+      }
+    });
+  </script>
+</body>
+</html>
