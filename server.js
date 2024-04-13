@@ -1,9 +1,12 @@
 // server.js
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const bodyParser = require('body-parser'); // Add body-parser
+
+app.use(cors());
 
 app.use(express.static('public'));
 app.use(bodyParser.json()); // Use body-parser to parse JSON requests
@@ -22,6 +25,7 @@ app.post('/send-update', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-http.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const lanIP = '0.0.0.0'; 
+app.listen(port, lanIP, () => {
+  console.log(`Server is running on port ${lanIP}:${port}`);
 });

@@ -26,11 +26,12 @@
       }
     
       const targetDiv = document.getElementById(targetDivId);
-      if (targetDiv) {
+      targetDiv.innerHTML = data.message;
+/*      if (targetDiv) {
         const newParagraph = document.createElement('p');
         newParagraph.textContent = data.message;
         targetDiv.appendChild(newParagraph);
-      }
+      } */
     });
   </script>
 </body>
